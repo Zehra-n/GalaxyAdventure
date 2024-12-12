@@ -1,6 +1,6 @@
 ﻿namespace AdventureGalaxy;
 
-public class Planet
+public class Planet : IMovable
 {
     public string Name { get; }
     public string Beschreibung { get; }
@@ -14,10 +14,19 @@ public class Planet
         Ressourcen = ressourcen;
         Bewohner = bewohner;
     }
-
+    public void Move()
+    {
+        Console.WriteLine($"Der Planet {Name} bewegt sich in seiner Umlaufbahn.");
+    }
+    public void Explore()
+    {
+        Console.WriteLine($"Du erkundest den Planeten {Name}: {Beschreibung}");
+            
+    }
     public void Erkunden(Raumschiff schiff)
     {
         Console.WriteLine($"Du landest auf dem Planeten {Name}: {Beschreibung}");
+
         if (Bewohner != null)
         {
             if (Bewohner.IstFeindlich)

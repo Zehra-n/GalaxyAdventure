@@ -1,12 +1,19 @@
-﻿namespace AdventureGalaxy;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
-public class Raumschiff
+namespace AdventureGalaxy;
+
+public class Raumschiff : IMovable, IAttackable, IDamageable
 {
     public string Name { get; }
     public int Gesundheit { get; private set; }
     public int Energie { get; private set; }
     public int Angriffskraft { get; private set; }
     public List<string> Ressourcen { get; }
+    
+    private const int MaxGesundheit = 100;
+
+    public bool IsDestroyed => Gesundheit <= 0;
 
     public Raumschiff(string name, int gesundheit, int energie, int angriffskraft)
     {
@@ -19,21 +26,47 @@ public class Raumschiff
 
     public void Reparieren()
     {
-        Gesundheit = 100;
-        Console.WriteLine($"{Name} wurde repariert.");
+        if (Gesundheit == MaxGesundheit)
+        {
+            Console.WriteLine($"{Name} ist bereits in einwandfreiem Zustand.");
+            return;
+        }
+
+        int reparaturKosten = 25;
+        int heilungsBetrag = 20;
+
+        if (Energie >= reparaturKosten)
+        {
+            Energie -= reparaturKosten;
+            Gesundheit += heilungsBetrag;
+            if (Gesundheit > MaxGesundheit)
+            {
+                Gesundheit = MaxGesundheit;
+            }
+            Console.WriteLine($"{Name} wurde um {heilungsBetrag} Punkte repariert. Gesundheit: {Gesundheit}, Energie: {Energie}");
+        }
+        else
+        {
+            Console.WriteLine($"{Name} hat nicht genug {Energie} für eine Reparatur.");
+        }
     }
 
-    public void Angriff(Alien alien)
+    public void Move()
     {
-        Console.WriteLine($"{Name} greift {alien.Name} an!");
-        alien.SchadenNehmen(Angriffskraft);
+        Console.WriteLine($"{Name} fliegt durch die Galaxie.");
     }
 
-    public void Energieverbrauchen(int menge)
+    public void Attack(IAttackable target)
     {
-        Energie -= menge;
-        if (Energie < 0) Energie = 0;
-        Console.WriteLine($"{Name} hat jetzt {Energie} Energie.");
+        Console.WriteLine($"{Name} greift {target} an!");
+        target.TakeDamage(Angriffskraft);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Gesundheit -= damage;
+        if (Gesundheit < 0) Gesundheit = 0;
+        Console.WriteLine($"{Name} hat {Gesundheit} Gesundheit übrig.");
     }
 
     public override string ToString()

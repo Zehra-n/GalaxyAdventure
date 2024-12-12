@@ -1,11 +1,13 @@
 ﻿namespace AdventureGalaxy;
 
-public class Alien
+public class Alien : IAttackable, IDamageable
 {
     public string Name { get; }
     public bool IstFeindlich { get; }
     public int Gesundheit { get; private set; }
     public int Angriffskraft { get; }
+
+    public bool IsDestroyed => Gesundheit <= 0;
 
     public Alien(string name, bool istFeindlich, int gesundheit, int angriffskraft)
     {
@@ -15,16 +17,17 @@ public class Alien
         Angriffskraft = angriffskraft;
     }
 
-    public void SchadenNehmen(int schaden)
+    public void Attack(IAttackable target)
     {
-        Gesundheit -= schaden;
-        if (Gesundheit < 0) Gesundheit = 0;
-        Console.WriteLine($"{Name} hat {Gesundheit} Gesundheit übrig.");
+        Console.WriteLine($"{Name} greift {target} an!");
+        target.TakeDamage(Angriffskraft);
     }
 
-    public void Angriff(Raumschiff schiff)
+    public void TakeDamage(int damage)
     {
-        Console.WriteLine($"{Name} greift {schiff.Name} an!");
+        Gesundheit -= damage;
+        if (Gesundheit < 0) Gesundheit = 0;
+        Console.WriteLine($"{Name} hat {Gesundheit} Gesundheit übrig.");
     }
 
     public override string ToString()
@@ -32,4 +35,4 @@ public class Alien
         return $"Alien: {Name}, Feindlich: {IstFeindlich}, Gesundheit: {Gesundheit}, Angriffskraft: {Angriffskraft}";
     }
 }
-    
+
