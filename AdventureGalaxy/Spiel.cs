@@ -20,17 +20,16 @@ public class Spiel
                     "Kryon",
                     "Ein gefrorener Planet voller Geheimnisse.",
                     new List<string>(),
-                    new Alien("Eiskrieger", true, 50, 10)
+                    new Alien("Eiskrieger", true, 60, 20)
                 ),
                 new Planet(
                     "Omega-7",
                     "Ein Handelsplanet mit freundlichen Aliens.",
                     new List<string> { "Gold", "Seltene Erden" },
-                    new Alien("Händler von Omega", false, 30, 0)
+                    new Alien("Händler von Omega", true, 60, 30)
                 )
             };
         }
-
         public void Start()
         {
             Console.WriteLine("Willkommen bei Galaxy Adventures!");
@@ -63,7 +62,6 @@ public class Spiel
                     }
                 }
             }
-
             Console.WriteLine("Du hast die Galaxie erfolgreich erkundet!");
         }
 
@@ -77,7 +75,7 @@ public class Spiel
                     gegner.Attack(schiff);
                 }
             }
-
+            
             if (schiff.IsDestroyed)
             {
                 Console.WriteLine("Dein Raumschiff wurde zerstört!");

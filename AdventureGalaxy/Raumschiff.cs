@@ -33,7 +33,7 @@ public class Raumschiff : IMovable, IAttackable, IDamageable
         }
 
         int reparaturKosten = 25;
-        int heilungsBetrag = 20;
+        int heilungsBetrag = 5;
 
         if (Energie >= reparaturKosten)
         {
