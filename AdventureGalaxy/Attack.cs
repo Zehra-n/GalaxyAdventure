@@ -6,3 +6,4 @@ public interface IAttackable
     void TakeDamage(int damage);
     bool IsDestroyed { get; }
 }
+

@@ -68,9 +68,11 @@ public class Raumschiff : IMovable, IAttackable, IDamageable
         if (Gesundheit < 0) Gesundheit = 0;
         Console.WriteLine($"{Name} hat {Gesundheit} Gesundheit übrig.");
     }
+    
 
     public override string ToString()
     {
         return $"Raumschiff: {Name}, Gesundheit: {Gesundheit}, Energie: {Energie}, Angriffskraft: {Angriffskraft}";
     }
 }
+

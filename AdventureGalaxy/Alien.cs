@@ -29,6 +29,7 @@ public class Alien : IAttackable, IDamageable
         if (Gesundheit < 0) Gesundheit = 0;
         Console.WriteLine($"{Name} hat {Gesundheit} Gesundheit übrig.");
     }
+    
 
     public override string ToString()
     {

@@ -18,11 +18,7 @@ public class Planet : IMovable
     {
         Console.WriteLine($"Der Planet {Name} bewegt sich in seiner Umlaufbahn.");
     }
-    public void Explore()
-    {
-        Console.WriteLine($"Du erkundest den Planeten {Name}: {Beschreibung}");
-            
-    }
+    
     public void Erkunden(Raumschiff schiff)
     {
         Console.WriteLine($"Du landest auf dem Planeten {Name}: {Beschreibung}");

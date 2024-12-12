@@ -65,6 +65,7 @@ public class Spiel
             Console.WriteLine("Du hast die Galaxie erfolgreich erkundet!");
         }
 
+        
         private void Kampf(IAttackable gegner)
         {
             while (!gegner.IsDestroyed && !schiff.IsDestroyed)
